@@ -1,0 +1,14 @@
+import requests
+
+def test_get_user():
+    response = requests.get("https://jsonplaceholder.typicode.com/users/1")
+
+    assert response.status_code == 200
+    assert response.json()["id"] == 1
+    assert "email" in response.json()
+
+def test_user_not_found():
+    response = requests.get("https://jsonplaceholder.typicode.com/users/999")
+
+    assert response.status_code == 404
+    assert response.json() == {}
